@@ -1,5 +1,7 @@
 job4j_social_media_api
 ---
+[![GitHub Action](https://github.com/aleksLiss/job4j_social_media_api/actions/workflows/main.yml/badge.svg)](https://github.com/aleksLiss/job4j_social_media_api/actions/workflows/main.yml)
+---
 Цель проекта: Разработать RESTful API для социальной медиа платформы, позволяющей пользователям регистрироваться, входить в систему, создавать посты, переписываться, подписываться на других пользователей и получать свою ленту активности.
 
 Требования:
