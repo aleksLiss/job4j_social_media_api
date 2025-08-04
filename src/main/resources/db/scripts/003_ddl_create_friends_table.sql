@@ -1,6 +1,5 @@
-create table if not exists messages (
+create table if not exists friends (
     id serial primary key,
-    content text,
     from_user_id int references users(id),
     to_user_id int references users(id)
 );
