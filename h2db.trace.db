@@ -1,0 +1,25 @@
+2025-08-04 23:05:28.599191+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-232]
+2025-08-04 23:05:28.933583+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "DATABASECHANGELOGLOCK" не найдена
+Table "DATABASECHANGELOGLOCK" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42102-232]
+2025-08-04 23:05:29.402260+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "create table if not exists users(\000a    id serial primary key,\000a    name varchar not null,\000a    login varchar not null unique,\000a    password varchar not null,\000a[*]);"; ожидалось "identifier"
+Syntax error in SQL statement "create table if not exists users(\000a    id serial primary key,\000a    name varchar not null,\000a    login varchar not null unique,\000a    password varchar not null,\000a[*]);"; expected "identifier"; SQL statement:
+create table if not exists users(
+    id serial primary key,
+    name varchar not null,
+    login varchar not null unique,
+    password varchar not null,
+); [42001-232]
+2025-08-04 23:07:31.742704+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "create table if not exists users (\000a    id serial primary key,\000a    name varchar not null,\000a    login varchar not null unique,\000a    password varchar not null,\000a[*]);"; ожидалось "identifier"
+Syntax error in SQL statement "create table if not exists users (\000a    id serial primary key,\000a    name varchar not null,\000a    login varchar not null unique,\000a    password varchar not null,\000a[*]);"; expected "identifier"; SQL statement:
+create table if not exists users (
+    id serial primary key,
+    name varchar not null,
+    login varchar not null unique,
+    password varchar not null,
+); [42001-232]
