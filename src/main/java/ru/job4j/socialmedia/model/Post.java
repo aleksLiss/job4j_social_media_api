@@ -2,6 +2,7 @@ package ru.job4j.socialmedia.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -15,16 +16,18 @@ public class Post {
     private String description;
     private String pathToFile;
     private Long userId;
+    private LocalDateTime createDate;
 
     public Post() {
     }
 
-    public Post(Long id, String title, String description, String pathToFile, Long userId) {
+    public Post(Long id, String title, String description, String pathToFile, Long userId, LocalDateTime createDate) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pathToFile = pathToFile;
         this.userId = userId;
+        this.createDate = createDate;
     }
 
     public Long getId() {
@@ -65,6 +68,14 @@ public class Post {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
     @Override
