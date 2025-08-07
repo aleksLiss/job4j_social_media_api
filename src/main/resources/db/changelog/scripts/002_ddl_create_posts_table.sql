@@ -3,5 +3,6 @@ create table if not exists posts (
     title varchar not null,
     description varchar not null,
     path_to_file varchar,
-    user_id int references users(id)
+    user_id int references users(id),
+    created timestamp
 );
