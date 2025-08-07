@@ -1,7 +1,7 @@
-2025-08-07 22:45:23.125234+03:00 jdbc[3]: exception
+2025-08-07 23:26:08.297460+03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOG" not found (this database is empty); SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42104-232]
-2025-08-07 22:45:23.300291+03:00 jdbc[3]: exception
+2025-08-07 23:26:13.626586+03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "DATABASECHANGELOGLOCK" не найдена
 Table "DATABASECHANGELOGLOCK" not found; SQL statement:
 SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42102-232]
