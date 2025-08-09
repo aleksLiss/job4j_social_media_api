@@ -17,8 +17,7 @@ public class Subscription {
     public Subscription() {
     }
 
-    public Subscription(Long id, Long followingUserId, Long followerUserId) {
-        this.id = id;
+    public Subscription(Long followingUserId, Long followerUserId) {
         this.followingUserId = followingUserId;
         this.followerUserId = followerUserId;
     }

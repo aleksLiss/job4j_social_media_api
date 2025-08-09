@@ -31,6 +31,14 @@ public class Post {
         this.created = created;
     }
 
+    public Post(String title, String description, String pathToFile, Long userId, Date created) {
+        this.title = title;
+        this.description = description;
+        this.pathToFile = pathToFile;
+        this.userId = userId;
+        this.created = created;
+    }
+
     public Long getId() {
         return id;
     }

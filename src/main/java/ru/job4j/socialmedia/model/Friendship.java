@@ -17,8 +17,7 @@ public class Friendship {
     public Friendship() {
     }
 
-    public Friendship(Long id, Long fromUserId, Long toUserId) {
-        this.id = id;
+    public Friendship(Long fromUserId, Long toUserId) {
         this.fromUserId = fromUserId;
         this.toUserId = toUserId;
     }
