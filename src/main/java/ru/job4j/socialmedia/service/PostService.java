@@ -1,10 +1,21 @@
 package ru.job4j.socialmedia.service;
 
+import ru.job4j.socialmedia.dto.PostDto;
+import ru.job4j.socialmedia.dto.PostUpdateDto;
+import ru.job4j.socialmedia.model.Post;
+
+import java.util.List;
+import java.util.Optional;
+
 public interface PostService {
 
-    void createNewPost(String title, String description, String pathToFile, long userId);
+    void createNewPost(Post post);
 
-    void updatePost(String title, String description, long postId);
+    boolean updatePost(PostUpdateDto postUpdateDto);
 
-    void deletePost(long postId);
+    boolean deletePost(long postId);
+
+    List<Post> findAllByUserId(long userId);
+
+    Optional<PostDto> findById(long postId);
 }
