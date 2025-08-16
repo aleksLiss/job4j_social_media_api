@@ -2,8 +2,6 @@ package ru.job4j.socialmedia.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +20,12 @@ public class User {
 
     public User(long id, String name, String login, String password) {
         this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(String name, String login, String password) {
         this.name = name;
         this.login = login;
         this.password = password;

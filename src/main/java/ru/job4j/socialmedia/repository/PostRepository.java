@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.socialmedia.model.Post;
 
 import java.util.Collection;
@@ -19,15 +20,16 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findByOrderByCreatedDesc(Pageable pageable);
 
+    @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = """
-            UPDATE Posts 
+            UPDATE Posts
             SET title = :postTitle, description = :postDescription
             WHERE id = :postId
             """, nativeQuery = true)
     int updateTitleAndDescription(@Param("postTitle") String title,
                                   @Param("postDescription") String description,
-                                  @Param("postId") long postId);
+                                  @Param("postId") Long postId);
 
     @Modifying(clearAutomatically = true)
     @Query(value = """
@@ -37,6 +39,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             """, nativeQuery = true)
     int deleteImageFromPost(@Param("postId") long postId);
 
+    @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = """
             DELETE FROM Posts WHERE id = :postId
