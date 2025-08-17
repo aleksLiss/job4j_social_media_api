@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.job4j.socialmedia.dto.PostDto;
-import ru.job4j.socialmedia.dto.PostUpdateDto;
+import ru.job4j.socialmedia.dto.PostSaveDto;
 import ru.job4j.socialmedia.model.Post;
 import ru.job4j.socialmedia.service.PostService;
 
@@ -22,21 +21,21 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Post> save(@RequestBody Post post) {
-        postService.createNewPost(post);
+    public ResponseEntity<Post> save(@RequestBody PostSaveDto postSaveDto) {
+        Post savedPost = postService.savePost(postSaveDto);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(post.getId())
+                .buildAndExpand(savedPost.getId())
                 .toUri();
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .location(uri)
-                .body(post);
+                .body(savedPost);
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostDto> getById(@PathVariable
+    public ResponseEntity<PostSaveDto> getById(@PathVariable
                                                @NotNull
                                                @Min(value = 1, message = "идентификатор должен быть 1 и более")
                                                Long postId) {
@@ -57,8 +56,8 @@ public class PostController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody PostUpdateDto postUpdateDto) {
-        if (postService.updatePost(postUpdateDto)) {
+    public ResponseEntity<Void> update(@RequestBody Post post) {
+        if (postService.updatePost(post)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -66,7 +65,7 @@ public class PostController {
 
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
-    public void change(@RequestBody PostUpdateDto postUpdateDto) {
-        postService.updatePost(postUpdateDto);
+    public void change(@RequestBody Post post) {
+        postService.updatePost(post);
     }
 }

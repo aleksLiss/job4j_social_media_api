@@ -1,12 +1,13 @@
 package ru.job4j.socialmedia.service;
 
 import org.springframework.stereotype.Service;
-import ru.job4j.socialmedia.dto.PostDto;
-import ru.job4j.socialmedia.dto.PostUpdateDto;
+import ru.job4j.socialmedia.dto.PostSaveDto;
 import ru.job4j.socialmedia.mapper.PostMapper;
 import ru.job4j.socialmedia.model.Post;
 import ru.job4j.socialmedia.repository.PostRepository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,17 +23,29 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public void createNewPost(Post post) {
-        postRepository.save(post);
+    public Post savePost(PostSaveDto postSaveDto) {
+        return postRepository.save(
+                new Post(
+                        postSaveDto.getTitle(),
+                        postSaveDto.getDescription(),
+                        postSaveDto.getPathToFile(),
+                        postSaveDto.getUserId(),
+                        Timestamp.valueOf(LocalDateTime.now())
+                )
+        );
     }
 
     @Override
-    public boolean updatePost(PostUpdateDto postUpdateDto) {
-        return postRepository.updateTitleAndDescription(
-                postUpdateDto.getTitle(),
-                postUpdateDto.getDescription(),
-                postUpdateDto.getPostId()
-        ) > 0;
+    public boolean updatePost(Post post) {
+        Optional<Post> foundPost = postRepository.findById(post.getId());
+        if (foundPost.isPresent()) {
+            return postRepository.updateTitleAndDescription(
+                    post.getTitle(),
+                    post.getDescription(),
+                    post.getId()
+            ) > 0;
+        }
+        return false;
     }
 
     @Override
@@ -46,11 +59,16 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public Optional<PostDto> findById(long postId) {
+    public Optional<PostSaveDto> findById(long postId) {
         Optional<Post> foundPost = postRepository.findById(postId);
         if (foundPost.isPresent()) {
             return Optional.of(
-                    postMapper.fromPostToPostDto(foundPost.get())
+                new PostSaveDto(
+                        foundPost.get().getTitle(),
+                        foundPost.get().getDescription(),
+                        foundPost.get().getUserId(),
+                        foundPost.get().getPathToFile()
+                )
             );
         }
         return Optional.empty();
