@@ -2,12 +2,15 @@ package ru.job4j.socialmedia.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.socialmedia.dto.PostSaveDto;
+import ru.job4j.socialmedia.dto.UserPostsDto;
 import ru.job4j.socialmedia.mapper.PostMapper;
 import ru.job4j.socialmedia.model.Post;
 import ru.job4j.socialmedia.repository.PostRepository;
+import ru.job4j.socialmedia.repository.UserRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +19,12 @@ public class SimplePostService implements PostService {
 
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final UserRepository userRepository;
 
-    public SimplePostService(PostRepository postRepository, PostMapper postMapper) {
+    public SimplePostService(PostRepository postRepository, PostMapper postMapper, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -63,14 +68,29 @@ public class SimplePostService implements PostService {
         Optional<Post> foundPost = postRepository.findById(postId);
         if (foundPost.isPresent()) {
             return Optional.of(
-                new PostSaveDto(
-                        foundPost.get().getTitle(),
-                        foundPost.get().getDescription(),
-                        foundPost.get().getUserId(),
-                        foundPost.get().getPathToFile()
-                )
+                    new PostSaveDto(
+                            foundPost.get().getTitle(),
+                            foundPost.get().getDescription(),
+                            foundPost.get().getUserId(),
+                            foundPost.get().getPathToFile()
+                    )
             );
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<UserPostsDto> findAllPostsByUsersId(List<Long> usersId) {
+        List<UserPostsDto> allPosts = new ArrayList<>();
+        for (Long userId : usersId) {
+            Optional<UserPostsDto> posts = postMapper.fromPostToUserPostsDto(
+                    userId,
+                    userRepository,
+                    postRepository);
+            if (posts.isPresent()) {
+                allPosts.add(posts.get());
+            }
+        }
+        return allPosts;
     }
 }

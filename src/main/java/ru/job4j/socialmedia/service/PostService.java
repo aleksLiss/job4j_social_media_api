@@ -1,6 +1,7 @@
 package ru.job4j.socialmedia.service;
 
 import ru.job4j.socialmedia.dto.PostSaveDto;
+import ru.job4j.socialmedia.dto.UserPostsDto;
 import ru.job4j.socialmedia.model.Post;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface PostService {
     List<Post> findAllByUserId(long userId);
 
     Optional<PostSaveDto> findById(long postId);
+
+    List<UserPostsDto> findAllPostsByUsersId(List<Long> usersId);
 }
