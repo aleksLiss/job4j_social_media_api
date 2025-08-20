@@ -1,6 +1,7 @@
 package ru.job4j.socialmedia.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.Objects;
@@ -12,7 +13,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String title;
+    @NotNull
     private String description;
     private String pathToFile;
     private Long userId;

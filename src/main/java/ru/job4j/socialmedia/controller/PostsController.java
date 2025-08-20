@@ -2,6 +2,7 @@ package ru.job4j.socialmedia.controller;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.socialmedia.model.Post;
@@ -9,6 +10,7 @@ import ru.job4j.socialmedia.service.PostService;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/posts")
 public class PostsController {

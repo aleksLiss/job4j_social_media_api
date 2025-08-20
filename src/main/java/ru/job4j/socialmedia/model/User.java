@@ -1,6 +1,7 @@
 package ru.job4j.socialmedia.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -11,8 +12,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
     private String name;
+    @NotNull
+    @Column(unique = true, nullable = false)
     private String login;
+    @NotNull
     private String password;
 
     public User() {

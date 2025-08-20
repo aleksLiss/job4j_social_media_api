@@ -2,6 +2,7 @@ package ru.job4j.socialmedia.controller;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import ru.job4j.socialmedia.dto.UserDto;
 import ru.job4j.socialmedia.model.User;
 import ru.job4j.socialmedia.service.UserService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserController {

@@ -1,6 +1,7 @@
 package ru.job4j.socialmedia.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
