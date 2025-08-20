@@ -41,7 +41,7 @@ public class UserController {
                                        Long userId) {
         return userService.findById(userId)
                 .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("/{userId}")
@@ -50,7 +50,7 @@ public class UserController {
                                            @Min(value = 1, message = "идентификатор должен быть 1 и более")
                                            Long userId) {
         if (userService.delete(userId)) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -64,7 +64,7 @@ public class UserController {
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody User user) {
         if (userService.update(user)) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

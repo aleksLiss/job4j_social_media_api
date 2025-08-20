@@ -41,7 +41,7 @@ public class PostController {
                                                Long postId) {
         return postService.findById(postId)
                 .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("/{postId}")
@@ -50,15 +50,15 @@ public class PostController {
                                            @Min(value = 1,  message = "идентификатор должен быть 1 и более")
                                            Long postId) {
         if (postService.deletePost(postId)) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody Post post) {
         if (postService.updatePost(post)) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
