@@ -1,10 +1,12 @@
 package ru.job4j.socialmedia.controller;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.job4j.socialmedia.dto.PostSaveDto;
@@ -14,6 +16,7 @@ import ru.job4j.socialmedia.service.PostService;
 @Slf4j
 @RestController
 @RequestMapping("/api/post")
+@Validated
 public class PostController {
 
     private final PostService postService;
@@ -23,7 +26,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Post> save(@RequestBody PostSaveDto postSaveDto) {
+    public ResponseEntity<Post> save(@Valid @RequestBody PostSaveDto postSaveDto) {
         Post savedPost = postService.savePost(postSaveDto);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -58,7 +61,7 @@ public class PostController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody Post post) {
+    public ResponseEntity<Void> update(@Valid @RequestBody Post post) {
         if (postService.updatePost(post)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
@@ -67,7 +70,7 @@ public class PostController {
 
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
-    public void change(@RequestBody Post post) {
+    public void change(@Valid @RequestBody Post post) {
         postService.updatePost(post);
     }
 }

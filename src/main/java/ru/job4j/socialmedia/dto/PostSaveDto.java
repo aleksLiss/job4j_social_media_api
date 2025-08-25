@@ -1,8 +1,12 @@
 package ru.job4j.socialmedia.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class PostSaveDto {
 
+    @NotBlank(message = "заголовок не может быть пустым")
     private String title;
+    @NotBlank(message = "описание не может быть пустым")
     private String description;
     private long userId;
     private String pathToFile;
